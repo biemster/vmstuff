@@ -1,0 +1,7 @@
+# partition table of jessie_bootable.img
+unit: sectors
+
+jessie_bootable.img1 : start=     2048, size=  2099200, Id=83, bootable
+jessie_bootable.img2 : start=        0, size=        0, Id= 0
+jessie_bootable.img3 : start=        0, size=        0, Id= 0
+jessie_bootable.img4 : start=        0, size=        0, Id= 0
