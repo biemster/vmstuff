@@ -39,5 +39,5 @@ pv $REL.img >> $REL_bootable.img
 sfdisk $REL_bootable.img < imglayout
 
 echo "DONE creating image."
-echo "Now boot into the bootable image using run_kvm.sh, login as root and apt-get grub2."
+echo "Now boot into the bootable image using run_kvm.sh, login as root, mount -o remount,rw /dev/sda1;apt-get update; apt-get install grub2."
 echo "After that you can boot the vm using kvm -hda $REL_bootable.img"
