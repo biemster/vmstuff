@@ -18,7 +18,7 @@ sudo sed -i '/^root/ { s/:x:/::/ }' $REL/etc/passwd
 printf '\nauto eth0\niface eth0 inet dhcp\n' | sudo tee -a $REL/etc/network/interfaces
 
 # mount rootfs rw on boot
-echo "/dev/sda1 / ext4 defaults,noatime,ro,errors=remount-ro 0 1" | sudo tee -a $REL/etc/fstab
+echo "/dev/sda1 / ext4 defaults,noatime,rw,errors=remount-ro 0 1" | sudo tee -a $REL/etc/fstab
 
 # Set up my ssh pubkey for root in the VM
 sudo mkdir $REL/root/.ssh/
