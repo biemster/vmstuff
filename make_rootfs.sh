@@ -6,7 +6,7 @@ else
     REL=$1
 fi
 
-MIRROR=http://ftp.nl.debian.org
+MIRROR=http://httpredir.debian.org
 
 mkdir $REL
 sudo debootstrap --include=openssh-server,build-essential,vim,git,linux-headers-amd64,linux-image-amd64 $REL $REL $MIRROR/debian
@@ -30,7 +30,7 @@ mkfs.ext4 -F $REL.img
 mkdir -p mnt
 sudo mount -o loop $REL.img mnt
 sudo cp -a $REL/. mnt/.
-sudo umount mnt
+sudo umount --force mnt
 rmdir mnt
 
 # make bootimg
@@ -38,6 +38,12 @@ dd if=/dev/zero of=$REL.bootable.img count=1 bs=1MiB
 pv $REL.img >> $REL.bootable.img
 sfdisk $REL.bootable.img < imglayout
 
+echo "--------------------"
 echo "DONE creating image."
-echo "Now boot into the bootable image using run_kvm.sh, login as root, mount -o remount,rw /dev/sda1;apt-get update; apt-get install grub2."
+echo "Now boot into the bootable image using run_kvm.sh, login as root,"
+echo "    # mount -o remount,rw /dev/sda1"
+echo "    # ifdown eth0; ifup eth0"
+echo "    # apt-get update"
+echo "    # apt-get install grub2."
 echo "After that you can boot the vm using kvm -hda $REL.bootable.img"
+echo "--------------------"
