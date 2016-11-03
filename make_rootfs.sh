@@ -36,11 +36,12 @@ rmdir mnt
 # make bootimg
 dd if=/dev/zero of=$REL.bootable.img count=1 bs=1MiB
 pv $REL.img >> $REL.bootable.img
-sfdisk $REL.bootable.img < imglayout
 
 echo "--------------------"
 echo "DONE creating image."
-echo "Now boot into the bootable image using run_kvm.sh, login as root,"
+echo "Now create a primary partition on the bootable image using fdisk,"
+echo "and activate it (options 'n' and 'a', write table with 'w')."
+echo "Then boot into the bootable image using run_kvm.sh, login as root,"
 echo "    # apt-get install grub2."
 echo "After that you can boot the vm using kvm -hda $REL.bootable.img"
 echo "--------------------"
