@@ -6,10 +6,10 @@ else
     REL=$1
 fi
 
-REL=$1
+MIRROR=http://ftp.nl.debian.org
 
 mkdir $REL
-sudo debootstrap --include=openssh-server,build-essential,vim,git,linux-headers-amd64,linux-image-amd64 $REL $REL
+sudo debootstrap --include=openssh-server,build-essential,vim,git,linux-headers-amd64,linux-image-amd64 $REL $REL $MIRROR
 
 # clear root password
 sudo sed -i '/^root/ { s/:x:/::/ }' $REL/etc/passwd
