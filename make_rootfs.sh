@@ -25,7 +25,7 @@ sudo mkdir $REL/root/.ssh/
 cat ~/.ssh/id_?sa.pub | sudo tee $REL/root/.ssh/authorized_keys
 
 # make img
-dd if=/dev/zero of=$REL.img bs=1M seek=1k count=1
+dd if=/dev/zero of=$REL.img bs=1M seek=2k count=1
 mkfs.ext4 -F $REL.img
 mkdir -p mnt
 sudo mount -o loop $REL.img mnt
