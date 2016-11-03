@@ -34,10 +34,10 @@ sudo umount mnt
 rmdir mnt
 
 # make bootimg
-dd if=/dev/zero of=$REL_bootable.img count=1 bs=1MiB
-pv $REL.img >> $REL_bootable.img
-sfdisk $REL_bootable.img < imglayout
+dd if=/dev/zero of=$REL.bootable.img count=1 bs=1MiB
+pv $REL.img >> $REL.bootable.img
+sfdisk $REL.bootable.img < imglayout
 
 echo "DONE creating image."
 echo "Now boot into the bootable image using run_kvm.sh, login as root, mount -o remount,rw /dev/sda1;apt-get update; apt-get install grub2."
-echo "After that you can boot the vm using kvm -hda $REL_bootable.img"
+echo "After that you can boot the vm using kvm -hda $REL.bootable.img"
