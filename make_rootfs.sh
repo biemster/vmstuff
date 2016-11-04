@@ -12,24 +12,24 @@ mkdir $REL
 sudo debootstrap --include=openssh-server,build-essential,vim,git,linux-headers-amd64,linux-image-amd64 $REL $REL $MIRROR/debian
 
 # clear root password
-sudo sed -i '/^root/ { s/:x:/::/ }' $REL/etc/passwd
+sudo sed -i '/^root/ { s/:x:/::/ }' ./$REL/etc/passwd
 
 # Automatically bring up eth0 using DHCP
-printf '\nauto eth0\niface eth0 inet dhcp\n' | sudo tee -a $REL/etc/network/interfaces
+printf '\nauto eth0\niface eth0 inet dhcp\n' | sudo tee -a ./$REL/etc/network/interfaces
 
 # mount rootfs rw on boot
-echo "/dev/sda1 / ext4 defaults,noatime,rw,errors=remount-ro 0 1" | sudo tee -a $REL/etc/fstab
+echo "/dev/sda1 / ext4 defaults,noatime,rw,errors=remount-ro 0 1" | sudo tee -a ./$REL/etc/fstab
 
 # Set up my ssh pubkey for root in the VM
-sudo mkdir $REL/root/.ssh/
-cat ~/.ssh/id_?sa.pub | sudo tee $REL/root/.ssh/authorized_keys
+sudo mkdir ./$REL/root/.ssh/
+cat ~/.ssh/id_?sa.pub | sudo tee ./$REL/root/.ssh/authorized_keys
 
 # make img
 dd if=/dev/zero of=$REL.img bs=1M seek=2k count=1
 mkfs.ext4 -F $REL.img
 mkdir -p mnt
 sudo mount -o loop $REL.img mnt
-sudo cp -a $REL/. mnt/.
+sudo cp -a ./$REL/. mnt/.
 sudo umount --force mnt
 rmdir mnt
 
