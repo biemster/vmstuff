@@ -16,6 +16,8 @@ sudo sed -i '/^root/ { s/:x:/::/ }' ./$REL/etc/passwd
 
 # Automatically bring up eth0 using DHCP
 printf '\nauto eth0\niface eth0 inet dhcp\n' | sudo tee -a ./$REL/etc/network/interfaces
+# Automatically bring up eth1 with static ip
+printf '\nauto eth1\niface eth1 inet static\naddress 192.168.1.57\nnetmask 255.255.0.0\n' | sudo tee -a ./$REL/etc/network/interfaces
 
 # mount rootfs rw on boot
 echo "/dev/sda1 / ext4 defaults,noatime,rw,errors=remount-ro 0 1" | sudo tee -a ./$REL/etc/fstab
