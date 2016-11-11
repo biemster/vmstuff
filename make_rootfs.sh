@@ -9,7 +9,7 @@ fi
 MIRROR=http://httpredir.debian.org
 
 mkdir $REL
-sudo debootstrap --include=openssh-server,build-essential,vim,git,pciutils,ca-certificates,linux-headers-amd64,linux-image-amd64 $REL $REL $MIRROR/debian
+sudo debootstrap --include=openssh-server,build-essential,python,vim,git,pciutils,ca-certificates,linux-headers-amd64,linux-image-amd64 $REL $REL $MIRROR/debian
 
 # clear root password
 sudo sed -i '/^root/ { s/:x:/::/ }' ./$REL/etc/passwd
