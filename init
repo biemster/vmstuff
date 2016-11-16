@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# follow http://mgalgs.github.io/2015/05/16/how-to-build-a-custom-linux-kernel-for-qemu-2015-edition.html
+# and    netmap: ./configure --drivers=e1000 --kernel-sources=$TOP/linux-4.8.8 --kernel-dir=$TOP/obj/linux-x86-basic
+# copy pkt-gen and libs needed using ldd pkt-gen
  
 mount -t proc none /proc
 mount -t sysfs none /sys
